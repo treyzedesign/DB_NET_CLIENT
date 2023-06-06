@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Chokokutai&display=swap');
+.logo{
+    font-family: 'Chokokutai', cursive;
+}
+.login{
+    max-height: 100vh;
+}
