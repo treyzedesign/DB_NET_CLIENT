@@ -103,11 +103,12 @@ export const AuthContextProvider = (props)=>{
                 'Content-Type': "application/json"
             }, 
             withCredentials : true,
-            Credential: 'include'
         }
         await axios.post(`${BASE_URL}/api/login`, data ,config).then((feedback)=>{
-            console.log(feedback);
-            Cookies.set('access_token', feedback.data.token, {expires: 1, sameSite:true, secure: false})
+            // console.log(feedback);
+            Cookies.set('refresh_token', feedback.data.refresh_token, {expires: 365, sameSite:"None", secure: true})
+            Cookies.set('access_token', feedback.data.token, {expires: 1, sameSite:"None", secure: true})
+            
             navigate('/')
         }).catch((error)=>{
             toast({
@@ -118,7 +119,7 @@ export const AuthContextProvider = (props)=>{
                 isClosable: true,
                 position: "top"
               })
-            console.log(error);
+            // console.log(error);
         })
     }
     const logout = async ()=>{
