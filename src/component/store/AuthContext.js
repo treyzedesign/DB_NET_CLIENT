@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { useDisclosure } from '@chakra-ui/react';
-
+import config from "../../config";
 const AuthContext = React.createContext({
     authPage : false,
     signupPage: ()=>{},
@@ -32,7 +32,7 @@ export const AuthContextProvider = (props)=>{
     const [loader, setLoader] = React.useState(false)
     const navigate = useNavigate()
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const BASE_URL = 'http://localhost:4444'
+    const BASE_URL = config.BASE_URL
 
     const signupPage = ()=>{
         setAuthPage(true)
@@ -230,9 +230,8 @@ export const AuthContextProvider = (props)=>{
             })
         })
     }
-     const api = axios.create({
-        baseURL: "http://localhost:4444"
-       
+    const api = axios.create({
+        baseURL: BASE_URL
     });
     React.useEffect(() => {
         axios.interceptors.response.use((response)=>{
