@@ -252,6 +252,15 @@ export const AuthContextProvider = (props)=>{
                     originalRequest.headers.authorization = `Bearer ${feedback.data.message}`
                     api(originalRequest).then((response) => {
                         console.log(response.data);
+                        toast({
+                            title: 'success',
+                            description: "action took place successfully",
+                            status: 'success',
+                            duration: 9000,
+                            isClosable: true,
+                            position: "top",
+                            variant: "top-accent",
+                        })
                     })
                     .catch((error) => {
                         console.log(error);

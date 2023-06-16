@@ -1,6 +1,6 @@
 
 const config = {
-    BASE_URL : "https://wide-eyed-wig-boa.cyclic.app"
+    BASE_URL : "https://dbnet-server.onrender.com"
 }
 
 export default config
