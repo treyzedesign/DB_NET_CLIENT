@@ -2,6 +2,8 @@
 .logo{
     font-family: 'Chokokutai', cursive;
 }
-.login{
-    max-height: 100vh;
+
+.side-item{
+    font-size: larger;
+    font-weight: 500;
 }
