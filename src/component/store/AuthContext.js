@@ -102,7 +102,8 @@ export const AuthContextProvider = (props)=>{
             headers:{
                 'Content-Type': "application/json"
             }, 
-            withCredentials : true
+            withCredentials : true,
+            Credential: 'include'
         }
         await axios.post(`${BASE_URL}/api/login`, data ,config).then((feedback)=>{
             console.log(feedback);
