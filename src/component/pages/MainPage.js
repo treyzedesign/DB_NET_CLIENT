@@ -58,12 +58,12 @@ const MainPage = () => {
     inputRef.current.click();
   };
   const viewImage = (url)=>{
-    window.location.href = url
+    window.open(url, "_blank")
   }
   return (
     <div>
-      <Box position={'relative'} pt={10}>
-        <Box px='15px'>
+      <Box position={'relative'}>
+        <Box px='15px' pt={10}>
             <Heading as={'h6'} mt='2vh' fontSize={'2xl'}>Upload file</Heading>
             <form>
               <Input type="text" 

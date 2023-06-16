@@ -7,6 +7,7 @@ import def from "../assets/default.jpg";
 import { useToast } from '@chakra-ui/react'
 import JsFileDownloader from 'js-file-downloader';
 import { progress } from 'framer-motion'
+import config from '../../config'
 const EachFile = () => {
     const ctx = useContext(AuthContext)
     const [AFile, setAFile] = React.useState([])
@@ -15,10 +16,10 @@ const EachFile = () => {
     const [progress, setprogress ] =React.useState(false)
     const [percent, setpercent ] =React.useState()
     const toast = useToast()
-    
+    const BASE_URL = config.BASE_URL
     const {Id} = useParams()
     const getfile = async(id)=>{
-      await axios.get(`http://localhost:4444/api/getAFile/${id}`).then((feedback)=>{
+      await axios.get(`${BASE_URL}/api/getAFile/${id}`).then((feedback)=>{
           // console.log(feedback);
           setfetched(feedback.data.message.title)
           setAFile(feedback.data.message.file)
