@@ -83,6 +83,7 @@ export const AuthContextProvider = (props)=>{
             // console.log(error);
         })
     }
+
     const signin = async(email, password)=>{
         if(email.current.value.length === 0 || password.current.value.length === 0){
             toast({
@@ -93,34 +94,35 @@ export const AuthContextProvider = (props)=>{
                 isClosable: true,
                 position: "top"
               })
+        }else{
+            const obj = {
+                email: email.current.value,
+                password: password.current.value
+            }
+            await axios.post(`${BASE_URL}/api/login`, obj).then((feedback)=>{
+                console.log(feedback);
+            }).catch((error)=>{
+                console.log(error);
+            })
         }
-        const data = {
-            email: email.current.value,
-            password: password.current.value
-        }
-        const config = {
-            headers:{
-                'Content-Type': "application/json"
-            }, 
-            withCredentials : true,
-        }
-        await axios.post(`${BASE_URL}/api/login`, data ,config).then((feedback)=>{
-            // console.log(feedback);
-            Cookies.set('refresh_token', feedback.data.refresh_token, {expires: 365, sameSite:"None", secure: true})
-            Cookies.set('access_token', feedback.data.token, {expires: 1, sameSite:"None", secure: true})
+        // const config = {
+        //     headers:{
+        //         'Content-Type': "application/json"
+        //     }, 
+        //     withCredentials : true,
+        // }
+    //     await axios.post(`${BASE_URL}/api/login`, {
+    //         email: email.current.value,
+    //         password: password.current.value
+    //     }).then((feedback)=>{
+    //         console.log(feedback);
+    //         // Cookies.set('refresh_token', feedback.data.refresh_token, {expires: 365, sameSite:"None", secure: true})
+    //         // Cookies.set('access_token', feedback.data.token, {expires: 1, sameSite:"None", secure: true})
             
-            navigate('/')
-        }).catch((error)=>{
-            toast({
-                title: 'Client error',
-                description: error.response.data.message + ", Create an Account",
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-                position: "top"
-              })
-            // console.log(error);
-        })
+    //         // navigate('/')
+    //     }).catch((err)=>{
+    //         console.log(err);
+    //     })
     }
     const logout = async ()=>{
         await axios.post(`${BASE_URL}/api/logout`).then((feedback)=>{
@@ -237,11 +239,11 @@ export const AuthContextProvider = (props)=>{
     });
     React.useEffect(() => {
         axios.interceptors.response.use((response)=>{
-            return response
+            console.log(response);
         }, (err)=>{
             const Token = Cookies.get("refresh_token")
             const originalRequest = err.config;
-
+            
             if(err.response.status === 401 && Token){
                 const data = {
                     refresh_token: Token
@@ -269,6 +271,7 @@ export const AuthContextProvider = (props)=>{
                     console.log(err);
                 })
             }
+            console.log(err)
         })
     }, []);
     return <AuthContext.Provider value={{
